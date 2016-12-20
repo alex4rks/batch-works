@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SkuManifest xmlns = "http://schemas.microsoft.com/2003/04/26/sm" root = "C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}">
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.18396276.865D.48EE.9C57.6599D1682371" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.2588E30E.8F30.4A9F.B1A7.84D16A613ED0" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.30D5A0B3.0755.4F97.9911.50746431E615" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.5924D119.099C.42BE.9C39.7F9330C04DE3" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.880B02DA.6BAE.45D3.89C2.4D22623C7BF5" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.9A841F17.2260.4C38.9B20.F9246F4F595C" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.9E7ACCC9.C486.4A0A.A1C0.456658A0C3E9" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.A4B33397.4C74.4123.AEA6.7C456D40A3AE" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.A9574C29.9803.4ACB.B729.75A941C836A6" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.D5E30E9D.F481.45A1.996C.D5CE906AFF54" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+	<FileTransfer src="C:\Users\01_tev\AppData\Local\Temp\OCTWork\{D3E0FBE2-492F-436D-9188-80465DBC1870}\Cabinets\CUST.CAB_Files\Icon.E4B46228.3E73.4391.A25E.AEF4AEE1424E" dest="D:\Soft\MSOffice_2016_Standard\install.MSP" binaryId="" />
+</SkuManifest>

@@ -1,0 +1,4 @@
+<Configuration Product="Publisher">
+  <USERNAME Value="clientname"/>
+  <Display Level="none" CompletionNotice="no" SuppressModal="yes" NoCancel="yes" AcceptEula="yes"/>
+</Configuration>
