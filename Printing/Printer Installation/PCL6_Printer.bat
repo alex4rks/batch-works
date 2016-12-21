@@ -5,36 +5,11 @@ Reg Query "HKLM\SOFTWARE\Microsoft\Command Processor" /v DisableUNCCheck 2>nul |
 if not %errorlevel%==0 (echo +++UNC Support & Reg.exe add "HKLM\SOFTWARE\Microsoft\Command Processor" /v "DisableUNCCheck" /t REG_DWORD /d "1" /f >nul)
 
 set PRN_NAME=%~1
-:: echo "%PRN_NAME%" | findstr /R "[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][A-Z][A-Z][A-Z]"
-echo %PRN_NAME% | findstr /R "[0][1][0-9][0-9]-[0][0-9][0-9][M,P][F,R][U,T]"
-if not %errorlevel%==0 goto WrongName
-
-set DEPT=%PRN_NAME:~2,2%
-FOR /F "tokens=* delims=0" %%A IN ("%PRN_NAME:~5,3%") DO SET PRN_NUM=%%A
-
-set PRN_IP=10.120.%DEPT%.%PRN_NUM%
-:: exceptions for RC, OP3, OP9, LC, OP7
-if %DEPT%==00 ( 
-	set PRN_IP=172.20.3.%PRN_NUM% )
-if %DEPT%==12 ( 
-	set PRN_IP=172.20.3.%PRN_NUM% )
-if %DEPT%==39 ( 
-	set PRN_IP=172.20.3.%PRN_NUM% )
-if %DEPT%==01 ( 
-	set PRN_IP=172.30.2.%PRN_NUM% )
-if %DEPT%==37 ( 
-	set PRN_IP=172.30.2.%PRN_NUM% )
-::echo name: %PRN_NAME% ip: %PRN_IP%
-goto Install
-
-:WrongName
-echo Please write the correct name of the printer, for example: %0 0100-010MFU
-exit /b 3
+set PRN_IP=%~2
 
 :Install	
 echo Adding PCL6 HP printer
 set PRINTER_NAME="HP Universal Printing PCL 6"
-::set Print_n="0100-010MFU"
 set Print_n=%PRN_NAME%
 set IP=%PRN_IP%
 set PORT=9100
