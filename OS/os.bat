@@ -1,4 +1,5 @@
 :: for Russian Windows OS 
+:: set file encoding to OEM866 or set "CHCP 65001 && os.bat" in cmd
 @echo off
 
 :: disable ipv6
@@ -8,9 +9,9 @@ netsh interface tcp set global rss=disabled autotuninglevel=disabled
 netsh interface 6to4 set state state=disabled 
 netsh interface isatap set state disabled 
 
-:: ¢™´ÓÁ®‚Ï Æ°≠†‡„¶•≠®• Ø™ ¢ ·•‚®
-netsh advfirewall firewall set rule group="é°≠†‡„¶•≠®• ·•‚®" new enable=Yes
-netsh advfirewall firewall set rule group="é°È®© §Æ·‚„Ø ™ ‰†©´†¨ ® Ø‡®≠‚•‡†¨" new enable=yes
+:: –≤–∫–ª—é—á–∏—Ç—å –æ–±–Ω–∞—Ä—É–∂–µ–Ω–∏–µ –ø–∫ –≤ —Å–µ—Ç–∏
+netsh advfirewall firewall set rule group="–û–±–Ω–∞—Ä—É–∂–µ–Ω–∏–µ —Å–µ—Ç–∏" new enable=Yes
+netsh advfirewall firewall set rule group="–û–±—â–∏–π –¥–æ—Å—Ç—É–ø –∫ —Ñ–∞–π–ª–∞–º –∏ –ø—Ä–∏–Ω—Ç–µ—Ä–∞–º" new enable=yes
 
 :: explorer settings
 :: show file extensions

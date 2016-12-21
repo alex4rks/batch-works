@@ -7,4 +7,5 @@ cscript C:\Windows\System32\slmgr.vbs /ipk %~1
 cscript C:\Windows\System32\slmgr.vbs /ato
 ping.exe    >nul 2>nul 127.0.0.1 -n 3
 
+:: check activation
 :: cscript C:\Windows\System32\slmgr.vbs /dlv
