@@ -19,7 +19,7 @@ msiexec.exe /qn /x {0E18CD78-6B42-4068-A51D-C5A85A9B32D2}
 :: 4.1.2
 msiexec.exe /qn /x {21B8775C-C570-4ED8-B53C-E5ADC872850A}
 
-echo Installing Open Office 3.4.1 RUS
+echo Installing Open Office 3.4.1
 msiexec.exe /I "%~dp0%INSTALLER%" /QB-! SETUP_USED=1 RebootYesNo=No REGISTER_NO_MSO_TYPES=1 CREATEDESKTOPLINK=1 ADDLOCAL=ALL REMOVE=gm_o_Quickstart,gm_o_Onlineupdate
 if %errorlevel%==0 ( echo SUCCESS : %installer% installed successfully )
 

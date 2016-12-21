@@ -16,7 +16,8 @@ if %errorlevel%==0 ( echo SUCCESS : %installer% installed successfully )
 msiexec.exe >nul /I "%~dp0%INSTALLER_viewer%" /QN /NORESTART
 if %errorlevel%==0 ( echo SUCCESS : %installer_viewer% installed successfully )
 ping 127.0.0.1 -n 8 >nul
-call "%~dp0LicenseAddon\install_addon.bat"
-if %errorlevel%==0 ( echo SUCCESS : License added )
+
+:: call "%~dp0LicenseAddon\install_addon.bat"
+:: if %errorlevel%==0 ( echo SUCCESS : License added )
 
 :Finish

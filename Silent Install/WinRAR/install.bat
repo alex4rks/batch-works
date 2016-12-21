@@ -20,6 +20,9 @@ taskkill.exe>nul 2>nul /F /T /IM "winrar*"
 echo Installing WinRAR
 "%~dp0%INSTALLER%" >nul /s
 if %errorlevel%==0 ( echo SUCCESS : %installer% installed successfully )
-copy /Y "%~dp0rarreg.key" "%PROGRAM_DIR%\WinRAR\rarreg.key" >nul
+if exist "%~dp0rarreg.key" (
+	copy /Y "%~dp0rarreg.key" "%PROGRAM_DIR%\WinRAR\rarreg.key" >nul
+	echo WinRAR key copied!
+)
 
 :Finish

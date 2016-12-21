@@ -10,10 +10,8 @@ if defined ProgramFiles(x86) set PROGRAM_DIR=%ProgramFiles(x86)%
 :: https://www.mozilla.org/en-US/firefox/all/?q=%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9
 :: http://winitpro.ru/index.php/2016/05/10/nastrojka-mozilla-firefox-dlya-raboty-v-korporativnoj-srede/
 for /R "%~dp0" %%i in ("Firefox Setup*.exe") do set INSTALLER=%%~nxi
-:: rare: unpacked version of installer :: core + seup.exe
-::set INSTALLER=setup.exe
 
-set PROGRAM_DESC=Веб-браузер
+set PROGRAM_DESC=Browser
 set PROGRAM_NAME=Mozilla Firefox
 set PROGRAM_EXEC=firefox.exe
 set KEY=%~1
@@ -85,7 +83,7 @@ if "%~1"=="" exit /B 1
 if defined ProgramFiles      call :DelDir "%ProgramFiles: (x86)=%\%~1"
 if defined ProgramFiles(x86) call :DelDir "%ProgramFiles(x86)%\%~1"
 for /D %%i in ("%SYSTEMDRIVE%\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
-for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\Администратор" "%%~i\*.*") do (
+for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\Administrator" "%%~i\*.*") do (
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files\%~1"      ) do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files (x86)\%~1") do call :DelDir "%%~k"
 )
@@ -95,7 +93,7 @@ exit /B
 if "%~1"=="" exit /B 1
 for /D %%h in (C D) do if exist "%%~h:" ^
 for /D %%i in ("%%~h:\Users" "%%~d:\Documents and Settings") do if exist "%%~i" ^
-for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Все пользователи" "%%~i\*.*") do if exist "%%~j" (
+for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\*.*") do if exist "%%~j" (
   for /D %%k in ("%%~j\AppData\Local\%~1"                             ) do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Windows\AppData\%~1") do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\LocalLow\%~1"                          ) do call :DelDir "%%~k"
@@ -111,7 +109,7 @@ exit /B
 :DelShortcuts
 if "%~1"=="" exit /B 1
 for /D %%i in ("%SYSTEMDRIVE%\Users" "D:\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
-for /D %%j in ("%%~i\*.*" "%%~i\All Users" "%%~i\Default" "%%~i\Все пользователи") do (
+for /D %%j in ("%%~i\*.*" "%%~i\All Users" "%%~i\Default") do (
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\%~1"
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\%~1"
   call :DelDir  "%%~j\Microsoft\Windows\Start Menu\Programs\%~1"

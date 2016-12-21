@@ -15,11 +15,11 @@ set Notes_pdata=C:\ProgramData\Lotus\Notes\Data
 
 
 :: Disable Remote differential connection
-Dism /online /Disable-Feature /FeatureName:MSRDC-Infrastructure
+:: Dism /online /Disable-Feature /FeatureName:MSRDC-Infrastructure
 :: Disable ipv6
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "0xff" /f
+:: reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "0xff" /f
 
-taskkill >nul 2>nul /t /f /im notes.exe /im notes.exe /im msiexec.exe
+taskkill >nul 2>nul /t /f /im "notes.exe" /im "notes2.exe"
 
 echo Installing Lotus Notes 8.5.3
 "%~dp0Lotus_notes853\setup.exe" /s /v"SETMULTIUSER=1 SELECTINSTALLFEATURES= /qn"

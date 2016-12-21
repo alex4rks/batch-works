@@ -9,7 +9,7 @@ if defined ProgramFiles(x86) (
   for /R "%~dp0" %%i in ("7z*x32*.msi") do set INSTALLER=%%~nxi
 )
 
-set PROGRAM_DESC=Архиватор
+set PROGRAM_DESC=7-Zip
 set PROGRAM_NAME=7-Zip
 set PROGRAM_EXEC=7zfm.exe
 
@@ -110,8 +110,7 @@ call       >nul 2>nul :Set_Assoc "xar"      "19"
 call       >nul 2>nul :Set_Assoc "xz"       "23"
 call       >nul 2>nul :Set_Assoc "z"        "5"
 call       >nul 2>nul :Set_Assoc "zip"      "1"
-::wscript.exe>nul 2>nul "%~dp0shortcut.vbs" "" "AllUsersPrograms\%PROGRAM_NAME%" "*"
-::wscript.exe>nul 2>nul "%~dp0shortcut.vbs" "%PROGRAM_DIR%\%PROGRAM_NAME%\%PROGRAM_EXEC%" "AllUsersPrograms" "%PROGRAM_NAME%" "%PROGRAM_DESC%"
+
 goto Finish
 
 :UnSet_Assoc
@@ -173,7 +172,7 @@ if "%~1"=="" exit /B 1
 if defined ProgramFiles      call :DelDir "%ProgramFiles: (x86)=%\%~1"
 if defined ProgramFiles(x86) call :DelDir "%ProgramFiles(x86)%\%~1"
 for /D %%i in ("%SYSTEMDRIVE%\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
-for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\Администратор" "%%~i\*.*") do (
+for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\*.*") do (
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files\%~1"      ) do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files (x86)\%~1") do call :DelDir "%%~k"
 )
@@ -182,25 +181,17 @@ exit /B
 :DelShortcuts
 if "%~1"=="" exit /B 1
 for /D %%i in ("%SYSTEMDRIVE%\Users" "D:\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
-for /D %%j in ("%%~i\*.*" "%%~i\All Users" "%%~i\Default" "%%~i\Все пользователи") do (
+for /D %%j in ("%%~i\*.*" "%%~i\All Users" "%%~i\Default") do (
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\%~1"
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\%~1"
   call :DelDir  "%%~j\Microsoft\Windows\Start Menu\Programs\%~1"
   call :DelDir  "%%~j\Microsoft\Windows\Start Menu\%~1"
-  call :DelDir  "%%~j\Главное меню\Программы\%~1"
-  call :DelDir  "%%~j\Главное меню\%~1"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\%~1.lnk"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\%~1.lnk"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Windows\Recent\%~1.lnk"
   call :DelFile "%%~j\Microsoft\Windows\Start Menu\Programs\%~1.lnk"
   call :DelFile "%%~j\Microsoft\Windows\Start Menu\%~1.lnk"
-  call :DelFile "%%~j\Главное меню\Программы\%~1.lnk"
-  call :DelFile "%%~j\Главное меню\%~1.lnk"
   call :DelFile "%%~j\Desktop\%~1.lnk"
-  call :DelFile "%%~j\Рабочий стол\%~1.lnk"
-  call :DelFile "%%~j\Application Data\Microsoft\Internet Explorer\Quick Launch\%~1.lnk"
-  call :DelFile "%%~j\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\%~1.lnk"
-  rem call :DelFile "%%~j\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\%~1.lnk"
 )
 if defined ProgramData (
   call :DelDir  "%ProgramData%\Microsoft\Windows\Start Menu\Programs\%~1"

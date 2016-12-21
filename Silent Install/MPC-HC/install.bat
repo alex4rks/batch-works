@@ -22,8 +22,6 @@ if /I "%~1"=="/u" goto Finish
 
 :Install
 "%~dp0%INSTALLER%" /VERYSILENT /NORESTART
-rem start "%PROGRAM_DIR%\MPC-HC\mpc-hc.exe" /regall
-rem ping -n 4 127.0.0.1 >nul 2>nul
 goto Finish
 
 :Finish

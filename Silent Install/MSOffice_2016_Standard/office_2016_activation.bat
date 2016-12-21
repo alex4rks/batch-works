@@ -1,6 +1,4 @@
 @echo off
-netsh winhttp set proxy 172.20.2.254:8080
-ping.exe    >nul 2>nul 127.0.0.1 -n 4
 
 set PROGRAM_DIR=%ProgramFiles: (x86)=%
 if defined ProgramW6432 set PROGRAM_DIR=%ProgramFiles(x86)%

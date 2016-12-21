@@ -10,7 +10,7 @@ set INSTALLER=%LibreOffice_pd%\%package%
 
 if not exist %LibreOffice_pd% mkdir %LibreOffice_pd%
 if exist "%INSTALLER%" goto Install
-echo Copying Libre Office 5 RUS to local disk
+echo Copying Libre Office 5 to local disk
 copy /Y "%~dp0%PACKAGE%" %LibreOffice_pd% >nul
 
 ping -n 4 127.0.0.1 >nul 2>nul
@@ -22,7 +22,7 @@ if not exist %INSTALLER% (
 
 :Install
 taskkill.exe >nul 2>nul /f /t /im soffice.exe /im soffice.bin /im "%INSTALLER%"
-echo Installing Libre Office 5 RUS from local disk
+echo Installing Libre Office 5 from local disk
 msiexec.exe /I "%INSTALLER%" /QB-! ADDLOCAL=ALL CREATEDESKTOPLINK=1 REGISTER_ALL_MSO_TYPES=1 REMOVE=gm_o_Onlineupdate RebootYesNo=No
 if %errorlevel%==0 ( 
 	echo SUCCESS : %installer% installed successfully 

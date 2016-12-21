@@ -12,7 +12,7 @@ if defined ProgramFiles(x86) set WOW6432NODE=Wow6432Node\
 :: https://www.google.ru/chrome/business/browser/admin/index.html
 set INSTALLER=GoogleChromeStandaloneEnterprise.msi
 
-set PROGRAM_DESC=Веб-браузер
+set PROGRAM_DESC=Browser
 set PROGRAM_NAME=Google Chrome
 set PROGRAM_EXEC=chrome.exe
 set KEY=%~1
@@ -105,7 +105,7 @@ if "%~1"=="" exit /B 1
 if defined ProgramFiles      call :DelDir "%ProgramFiles: (x86)=%\%~1"
 if defined ProgramFiles(x86) call :DelDir "%ProgramFiles(x86)%\%~1"
 for /D %%i in ("%SYSTEMDRIVE%\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
-for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\Администратор" "%%~i\*.*") do (
+for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\*.*") do (
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files\%~1"      ) do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files (x86)\%~1") do call :DelDir "%%~k"
 )
@@ -114,8 +114,8 @@ exit /B
 :DelDirInAppData
 if "%~1"=="" exit /B 1
 for /D %%h in (C D) do if exist "%%~h:" ^
-for /D %%i in ("%%~h:\Users" "%%~d:\Documents and Settings") do if exist "%%~i" ^
-for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Все пользователи" "%%~i\*.*") do if exist "%%~j" (
+for /D %%i in ("%%~h:\Users") do if exist "%%~i" ^
+for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\*.*") do if exist "%%~j" (
   for /D %%k in ("%%~j\AppData\Local\%~1"                             ) do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Windows\AppData\%~1") do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\LocalLow\%~1"                          ) do call :DelDir "%%~k"
@@ -130,26 +130,19 @@ exit /B
 
 :DelShortcuts
 if "%~1"=="" exit /B 1
-for /D %%i in ("%SYSTEMDRIVE%\Users" "D:\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
-for /D %%j in ("%%~i\*.*" "%%~i\All Users" "%%~i\Default" "%%~i\Все пользователи") do (
+for /D %%i in ("%SYSTEMDRIVE%\Users" "D:\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^ (
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\%~1"
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\%~1"
   call :DelDir  "%%~j\Microsoft\Windows\Start Menu\Programs\%~1"
   call :DelDir  "%%~j\Microsoft\Windows\Start Menu\%~1"
-  call :DelDir  "%%~j\Главное меню\Программы\%~1"
-  call :DelDir  "%%~j\Главное меню\%~1"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\%~1.lnk"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\%~1.lnk"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Windows\Recent\%~1.lnk"
   call :DelFile "%%~j\Microsoft\Windows\Start Menu\Programs\%~1.lnk"
   call :DelFile "%%~j\Microsoft\Windows\Start Menu\%~1.lnk"
-  call :DelFile "%%~j\Главное меню\Программы\%~1.lnk"
-  call :DelFile "%%~j\Главное меню\%~1.lnk"
   call :DelFile "%%~j\Desktop\%~1.lnk"
-  call :DelFile "%%~j\Рабочий стол\%~1.lnk"
   call :DelFile "%%~j\Application Data\Microsoft\Internet Explorer\Quick Launch\%~1.lnk"
   call :DelFile "%%~j\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\%~1.lnk"
-  rem call :DelFile "%%~j\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\%~1.lnk"
 )
 if defined ProgramData (
   call :DelDir  "%ProgramData%\Microsoft\Windows\Start Menu\Programs\%~1"

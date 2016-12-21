@@ -1,29 +1,30 @@
-::@echo off
-echo os
-call "%~dp0..\_Script\OS\os.bat"
+@echo off
+:: Disable CMD UNC Check
+setlocal enableextensions
+Reg Query "HKLM\SOFTWARE\Microsoft\Command Processor" /v DisableUNCCheck 2>nul | findstr /c:"DisableUNCCheck    REG_DWORD    0x1" >nul
+if not %errorlevel%==0 (echo +++UNC Support & Reg.exe add "HKLM\SOFTWARE\Microsoft\Command Processor" /v "DisableUNCCheck" /t REG_DWORD /d "1" /f >nul)
+
 
 echo Libs..
-call "%~dp0..\Java\install.bat"
-call "%~dp0..\Dotnet4\install.bat"
+call "%~dp0Java\install.bat"
+call "%~dp0Dotnet4\install.bat"
 
-echo Must have: part 1
-call "%~dp0..\Radmin\install.bat"
-call "%~dp0..\AdobeReader\install.bat"
-call "%~dp0..\doPDF\install.bat"
-call "%~dp0..\FlashPlayer\install.bat"
-call "%~dp0..\Lotus\install.bat"
-call "%~dp0..\OpenOffice\install.bat"
-call "%~dp0..\LibreOffice\install.bat"
+echo part 1
+call "%~dp0Radmin\install.bat"
+call "%~dp0AdobeReader\install.bat"
+call "%~dp0doPDF\install.bat"
+call "%~dp0FlashPlayer\install.bat"
+call "%~dp0Lotus\install.bat"
+call "%~dp0OpenOffice\install.bat"
+call "%~dp0LibreOffice\install.bat"
 
 echo part 2..
-call "%~dp0..\Firefox\install.bat"
-call "%~dp0..\WinRAR\install.bat"
-call "%~dp0..\Skype\install.bat"
+call "%~dp0Firefox\install.bat"
+call "%~dp0WinRAR\install.bat"
+call "%~dp0Skype\install.bat"
 
 echo part 3..
-call "%~dp0..\DWG\install.bat"
-call "%~dp0..\NS-2000\install.bat"
-call "%~dp0..\INVENTORY\install.bat"
-call "%~dp0..\_Script\OS\SEPM_default.bat"
+call "%~dp0DWG\install.bat"
+::call <your script>
 
 :Finish
