@@ -47,7 +47,7 @@ rmdir             >nul 2>nul /S /Q "%ALLUSERSPROFILE%\Adobe\ARM"
 rmdir             >nul 2>nul /S /Q "%COMMONPROGRAMFILES%\Adobe\ARM"
 rmdir             >nul 2>nul /S /Q "%COMMONPROGRAMFILES%\Adobe\Updater6"
 del               >nul 2>nul /A /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe Reader*.lnk"
-del               >nul 2>nul /A /F /Q "%ALLUSERSPROFILE%\����稩 �⮫\Adobe Reader*.lnk"
+del               >nul 2>nul /A /F /Q "%ALLUSERSPROFILE%\Рабочий стол\Adobe Reader*.lnk"
 del               >nul 2>nul /A /F /Q "%PUBLIC%\Desktop\Adobe Reader*.lnk"
 reg.exe           >nul 2>nul delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"             /V "Adobe ARM" /F
 reg.exe           >nul 2>nul delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /V "Adobe ARM" /F

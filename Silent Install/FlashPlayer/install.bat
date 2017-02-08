@@ -15,7 +15,7 @@ for /R "%~dp0" %%i in ("*_plugin.msi") do set INSTALLER2=%%~nxi
 set PROGRAM_NAME=Flash Player
 
 :UnInstall
-taskkill.exe       >nul 2>nul /F /T /IM "%INSTALLER1%" /IM "%INSTALLER2%" /IM "flashutil*" /IM "firefox.exe" /IM "opera.exe" /IM "iexplore.exe"
+taskkill.exe       >nul 2>nul /F /T /IM "%INSTALLER1%" /IM "%INSTALLER2%" /IM "flashutil*" /IM "firefox.exe" /IM "iexplore.exe"
 :: "%~dp0%INSTALLER1%">nul /uninstall
 :: "%~dp0%INSTALLER2%">nul /uninstall
 :: "%~dp0%INSTALLER3%">nul 2>nul /uninstall

@@ -5,13 +5,13 @@ Reg Query "HKLM\SOFTWARE\Microsoft\Command Processor" /v DisableUNCCheck 2>nul |
 if not %errorlevel%==0 (echo +++UNC Support & Reg.exe add "HKLM\SOFTWARE\Microsoft\Command Processor" /v "DisableUNCCheck" /t REG_DWORD /d "1" /f >nul)
 
 for /R "%~dp0" %%i in ("jre*.msi") do set INSTALLER=%%~nxi
-set UNINSTALLER={308F3CDD-294D-460A-AEC0-9E8C4AB5855E}
+set UNINSTALLER={26A24AE4-039D-4CA4-87B4-2F83216016FF}
 
 set PROGRAM_NAME=Java
 
 :UnInstall
 setlocal
-taskkill.exe>nul 2>nul /F /T /IM "javaw.exe" /IM "jp2launcher.exe" /IM "jqs.exe" /IM "jusched.exe" /IM "chrome.exe" /IM "firefox.exe" /IM "iexplore.exe" /IM "opera.exe"
+taskkill.exe>nul 2>nul /F /T /IM "javaw.exe" /IM "jp2launcher.exe" /IM "jqs.exe" /IM "jusched.exe" /IM "iexplore.exe"
 msiexec.exe >nul 2>nul /X "%~dp0%INSTALLER%" /QN /NORESTART
 ::msiexec.exe >nul 2>nul /X "%~dp0x64\%INSTALLER%" /QN /NORESTART
 msiexec.exe >nul 2>nul /X "%UNINSTALLER%"        /QN /NORESTART
@@ -21,12 +21,12 @@ call        >nul 2>nul :DelShortcuts "Java"
 if /I "%KEY%"=="-u" goto Finish
 
 :Install
-echo Installing Java x32 for x86/x64 OS
-msiexec.exe >nul /I "%~dp0%INSTALLER%" /QN /NORESTART ALLUSERS=1 ADDLOCAL=ALL IEXPLORER=1 MOZILLA=1 STATIC=1 UPDATECHECK=0 AUTOUPDATECHECK=0 JAVAUPDATE=0 JU=0 JQS=0 SYSTRAY=0 EULA=0 REBOOT=suppress
+echo Installing Java 32 for x86 and amd64
+msiexec.exe >nul /I "%~dp0%INSTALLER%" /QN /NORESTART ALLUSERS=1 ADDLOCAL=ALL IEXPLORER=1 MOZILLA=0 STATIC=1 UPDATECHECK=0 AUTOUPDATECHECK=0 JAVAUPDATE=0 JU=0 JQS=0 SYSTRAY=0 EULA=0 REBOOT=suppress
 if %errorlevel%==0 ( echo SUCCESS : %installer% installed successfully )
 ::64 bit
 :: msiexec.exe >nul /I "%~dp0x64\%INSTALLER%" /QN /NORESTART ALLUSERS=1 ADDLOCAL=ALL IEXPLORER=1 MOZILLA=1 STATIC=1 UPDATECHECK=0 AUTOUPDATECHECK=0 JAVAUPDATE=0 JU=0 JQS=0 SYSTRAY=0 EULA=0 REBOOT=suppress
-msiexec.exe >nul 2>nul /X "%UNINSTALLER%" /QN /NORESTART
+msiexec.exe >nul 2>nul /X "{4A03706F-666A-4037-7777-5F2748764D10}" /QN /NORESTART
 call        >nul 2>nul :UnInstallByName "Java Auto Updater"
 net.exe     >nul 2>nul stop   "JavaQuickStarterService"
 reg.exe     >nul 2>nul delete "HKLM\SYSTEM\CurrentControlSet\Services\JavaQuickStarterService" /F
@@ -81,7 +81,7 @@ exit /B
 if "%~1"=="" exit /B 1
 if defined ProgramFiles      call :DelDir "%ProgramFiles: (x86)=%\%~1"
 if defined ProgramFiles(x86) call :DelDir "%ProgramFiles(x86)%\%~1"
-for /D %%i in ("%SYSTEMDRIVE%\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
+for /D %%i in ("%SYSTEMDRIVE%\Users") do ^
 for /D %%j in ("%%~i\All Users" "%%~i\Default" "%%~i\Public" "%%~i\*.*") do (
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files\%~1"      ) do call :DelDir "%%~k"
   for /D %%k in ("%%~j\AppData\Local\VirtualStore\Program Files (x86)\%~1") do call :DelDir "%%~k"
@@ -90,7 +90,7 @@ exit /B
 
 :DelShortcuts
 if "%~1"=="" exit /B 1
-for /D %%i in ("%SYSTEMDRIVE%\Users" "D:\Users" "%SYSTEMDRIVE%\Documents and Settings") do ^
+for /D %%i in ("%SYSTEMDRIVE%\Users") do ^
 for /D %%j in ("%%~i\*.*" "%%~i\All Users" "%%~i\Default") do (
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\%~1"
   call :DelDir  "%%~j\AppData\Roaming\Microsoft\Windows\Start Menu\%~1"
