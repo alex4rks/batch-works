@@ -1,2 +1,2 @@
 # batch-works
-bat, cmd, vbs scripts
+CMD, VBS, PS scripts for Windows configuration and software installation.
