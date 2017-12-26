@@ -1,5 +1,9 @@
 @echo off
-set PATH=%SYSTEMROOT%\SYSTEM32;%SYSTEMROOT%;%SYSTEMROOT%\SYSTEM32\WBEM;
+:: Disable CMD UNC Check
+setlocal enableextensions
+Reg Query "HKLM\SOFTWARE\Microsoft\Command Processor" /v DisableUNCCheck 2>nul | findstr /c:"DisableUNCCheck    REG_DWORD    0x1" >nul
+if not %errorlevel%==0 (echo +++UNC Support & Reg.exe add "HKLM\SOFTWARE\Microsoft\Command Processor" /v "DisableUNCCheck" /t REG_DWORD /d "1" /f >nul)
+
 set PROGRAM_DIR=%ProgramFiles: (x86)=%
 
 :: http://sourceforge.net/projects/sevenzip/files/7-Zip/
@@ -16,63 +20,56 @@ set PROGRAM_EXEC=7zfm.exe
 set   PROGRAM_ID=7-Zip.
 set PROGRAM_ICON=7z.dll
 
-set KEY=%~1
-if defined SFXCMD set SFXCMD=%SFXCMD:*.exe=%
-if defined SFXCMD set SFXCMD=%SFXCMD:"=%
-if defined SFXCMD set    KEY=%SFXCMD: =%
-if defined KEY    set    KEY=%KEY:/=-%
-
-if /I "%KEY%"=="-sfx" goto MakeSFX
 
 :UnInstall
 taskkill.exe>nul 2>nul /F /T /IM "%PROGRAM_EXEC%" /IM "7z.exe" /IM "7zg.exe"
-msiexec.exe >nul 2>nul /X "%~dp0%INSTALLER%" /QN /NORESTART
-call        >nul 2>nul :UnInstallByName "7-Zip"
-call        >nul 2>nul :DelDirInProgs "7-Zip"
-for /F "tokens=1,2,*" %%i in ('reg.exe 2^>nul query "HKU"') do ^
-reg.exe     >nul 2>nul delete "%%~i\Software\7-Zip" /F
-reg.exe     >nul 2>nul delete "HKLM\Software\7-Zip" /F
-call        >nul 2>nul :UnSet_Assoc "7z"
-call        >nul 2>nul :UnSet_Assoc "arj"
-call        >nul 2>nul :UnSet_Assoc "bz2"
-call        >nul 2>nul :UnSet_Assoc "bzip2"
-call        >nul 2>nul :UnSet_Assoc "cab"
-call        >nul 2>nul :UnSet_Assoc "cpio"
-call        >nul 2>nul :UnSet_Assoc "deb"
-call        >nul 2>nul :UnSet_Assoc "dmg"
-call        >nul 2>nul :UnSet_Assoc "fat"
-call        >nul 2>nul :UnSet_Assoc "gz"
-call        >nul 2>nul :UnSet_Assoc "gzip"
-call        >nul 2>nul :UnSet_Assoc "hfs"
-call        >nul 2>nul :UnSet_Assoc "iso"
-call        >nul 2>nul :UnSet_Assoc "lha"
-call        >nul 2>nul :UnSet_Assoc "lzh"
-call        >nul 2>nul :UnSet_Assoc "lzma"
-call        >nul 2>nul :UnSet_Assoc "ntfs"
-call        >nul 2>nul :UnSet_Assoc "rar"
-call        >nul 2>nul :UnSet_Assoc "rpm"
-call        >nul 2>nul :UnSet_Assoc "squashfs"
-call        >nul 2>nul :UnSet_Assoc "001"
-call        >nul 2>nul :UnSet_Assoc "swm"
-call        >nul 2>nul :UnSet_Assoc "tar"
-call        >nul 2>nul :UnSet_Assoc "taz"
-call        >nul 2>nul :UnSet_Assoc "tbz"
-call        >nul 2>nul :UnSet_Assoc "tbz2"
-call        >nul 2>nul :UnSet_Assoc "tgz"
-call        >nul 2>nul :UnSet_Assoc "tpz"
-call        >nul 2>nul :UnSet_Assoc "txz"
-call        >nul 2>nul :UnSet_Assoc "vhd"
-call        >nul 2>nul :UnSet_Assoc "wim"
-call        >nul 2>nul :UnSet_Assoc "xar"
-call        >nul 2>nul :UnSet_Assoc "xz"
-call        >nul 2>nul :UnSet_Assoc "z"
-call        >nul 2>nul :UnSet_Assoc "zip"
-call        >nul 2>nul :DelShortcuts "7-Zip*"
+msiexec.exe /X "%~dp0%INSTALLER%" /QN /NORESTART
+:: call        >nul 2>nul :UnInstallByName "7-Zip"
+:: call        >nul 2>nul :DelDirInProgs "7-Zip"
+:: for /F "tokens=1,2,*" %%i in ('reg.exe 2^>nul query "HKU"') do ^
+:: reg.exe     >nul 2>nul delete "%%~i\Software\7-Zip" /F
+:: reg.exe     >nul 2>nul delete "HKLM\Software\7-Zip" /F
+:: call        >nul 2>nul :UnSet_Assoc "7z"
+:: call        >nul 2>nul :UnSet_Assoc "arj"
+:: call        >nul 2>nul :UnSet_Assoc "bz2"
+:: call        >nul 2>nul :UnSet_Assoc "bzip2"
+:: call        >nul 2>nul :UnSet_Assoc "cab"
+:: call        >nul 2>nul :UnSet_Assoc "cpio"
+:: call        >nul 2>nul :UnSet_Assoc "deb"
+:: call        >nul 2>nul :UnSet_Assoc "dmg"
+:: call        >nul 2>nul :UnSet_Assoc "fat"
+:: call        >nul 2>nul :UnSet_Assoc "gz"
+:: call        >nul 2>nul :UnSet_Assoc "gzip"
+:: call        >nul 2>nul :UnSet_Assoc "hfs"
+:: call        >nul 2>nul :UnSet_Assoc "iso"
+:: call        >nul 2>nul :UnSet_Assoc "lha"
+:: call        >nul 2>nul :UnSet_Assoc "lzh"
+:: call        >nul 2>nul :UnSet_Assoc "lzma"
+:: call        >nul 2>nul :UnSet_Assoc "ntfs"
+:: call        >nul 2>nul :UnSet_Assoc "rar"
+:: call        >nul 2>nul :UnSet_Assoc "rpm"
+:: call        >nul 2>nul :UnSet_Assoc "squashfs"
+:: call        >nul 2>nul :UnSet_Assoc "001"
+:: call        >nul 2>nul :UnSet_Assoc "swm"
+:: call        >nul 2>nul :UnSet_Assoc "tar"
+:: call        >nul 2>nul :UnSet_Assoc "taz"
+:: call        >nul 2>nul :UnSet_Assoc "tbz"
+:: call        >nul 2>nul :UnSet_Assoc "tbz2"
+:: call        >nul 2>nul :UnSet_Assoc "tgz"
+:: call        >nul 2>nul :UnSet_Assoc "tpz"
+:: call        >nul 2>nul :UnSet_Assoc "txz"
+:: call        >nul 2>nul :UnSet_Assoc "vhd"
+:: call        >nul 2>nul :UnSet_Assoc "wim"
+:: call        >nul 2>nul :UnSet_Assoc "xar"
+:: call        >nul 2>nul :UnSet_Assoc "xz"
+:: call        >nul 2>nul :UnSet_Assoc "z"
+:: call        >nul 2>nul :UnSet_Assoc "zip"
+:: call        >nul 2>nul :DelShortcuts "7-Zip*"
 if /I "%KEY%"=="-u" goto Finish
 
 :Install
-msiexec.exe>nul 2>nul /I "%~dp0%INSTALLER%" /QN /NORESTART ALLUSERS=1
-reg.exe    >nul 2>nul import "%~dp07-zip.reg"
+msiexec.exe /I "%~dp0%INSTALLER%" /QN /NORESTART ALLUSERS=1
+reg.exe    import "%~dp07-zip.reg"
 set PROGRAM_DIR=%ProgramFiles: (x86)=%
 if exist "%ProgramFiles(x86)%\%PROGRAM_NAME%\%PROGRAM_EXEC%" set PROGRAM_DIR=%ProgramFiles(x86)%
 call       >nul 2>nul :Set_Assoc "7z"       "0"
@@ -282,7 +279,6 @@ msiexec.exe /X "%~1" /QN /NORESTART
 reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%~1" /F
 reg.exe delete "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%~1" /F
 exit /B
-
 :MatchStr
 if "%~1"=="" exit /B 1
 if "%~2"=="" exit /B 1
@@ -296,5 +292,4 @@ exit /B
 :MatchStr2
 if "%~1"=="%~2" exit /B 1
 exit /B 0
-
 :Finish

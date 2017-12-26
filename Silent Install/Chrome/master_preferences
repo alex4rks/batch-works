@@ -1,5 +1,5 @@
 ?{
-"homepage" : "http://google.com",
+"homepage" : "https://google.ru",
 "homepage_is_newtabpage" : false,
 "browser" : {
 "show_home_button" : true,
@@ -26,6 +26,6 @@
 "import_history" : false,
 "create_all_shortcuts" : true,
 "do_not_launch_chrome" : true,
-"make_chrome_default" : false
+"make_chrome_default" : true
 }
 } 

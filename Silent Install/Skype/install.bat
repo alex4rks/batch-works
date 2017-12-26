@@ -50,7 +50,7 @@ if /I "%KEY%"=="-u" goto Finish
 echo Installing Skype...
 :: QN for silent QB-! for gui progress bar
 ::msiexec.exe /I "%INSTALLER%" /QN /NORESTART ALLUSERS=1
-msiexec.exe /I "%INSTALLER%" /QB-! /NORESTART ALLUSERS=1
+msiexec.exe /I "%INSTALLER%" /QN /NORESTART ALLUSERS=1
 if %errorlevel%==0 ( echo SUCCESS : %INSTALLER% installed successfully )
 
 sc.exe      >nul 2>nul stop   "SkypeUpdate"
