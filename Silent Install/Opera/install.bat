@@ -19,9 +19,8 @@ if /I "%KEY%"=="-u" goto Finish
 
 :Install
 ping 127.0.0.1 -n 7 >nul 2>nul
-:: setx /M OPERA_AUTOUPDATE_DISABLED "wtf some text"
 "%~dp0%INSTALLER%" /SILENT /ALLUSERS=YES /LAUNCHBROWSER=NO /SETDEFAULTBROWSER=YES /STARTMENUSHORTCUT=YES /DESKTOPSHORTCUT=NO /PINTOTASKBAR=YES /import-browser-data=NO /enable-stats=NO /enable-installer-stats=NO"
 
-for /f "tokens=2 delims=\" %%x in ('schtasks /query /fo:list ^| find "Opera"') do schtasks /Change /TN "%%x" /Disable
+:: for /f "tokens=2 delims=\" %%x in ('schtasks /query /fo:list ^| find "Opera"') do schtasks /Change /TN "%%x" /Disable
 
 :Finish
