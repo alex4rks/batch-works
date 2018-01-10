@@ -1,4 +1,4 @@
-::@echo off
+@echo off
 :: Disable CMD UNC Check
 setlocal enableextensions
 Reg Query "HKLM\SOFTWARE\Microsoft\Command Processor" /v DisableUNCCheck 2>nul | findstr /c:"DisableUNCCheck    REG_DWORD    0x1" >nul
